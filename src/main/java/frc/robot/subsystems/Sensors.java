@@ -28,6 +28,8 @@ public class Sensors extends Subsystem {
   //public final double ENCODERCOUNTSPERINCH = 0.8; // wooden robot
   public final double ENCODER_COUNTS_PER_INCH_HIGH_GEAR = 0.44444; // new Drive train no extras
   public final double ENCODER_COUNTS_PER_INCH_LOW_GEAR = .63;
+  public static final double NEW_HIGH_ENCODER_COUNTS = 0.63;
+  public static final double NEW_LOW_ENCODER_COUNTS = 0.63/2.0;
   public static final double ENCODER_TICKS_PER_INCH = 23.8; // powerup robot
   double positionX = 0;
   double positionY = 0;
@@ -44,6 +46,10 @@ public class Sensors extends Subsystem {
     return vacSense.get();
   }
   */
+
+  public double getEncoderCountsPerInch() {
+    return Robot.pneumatics.getState(Pneumatics.SHIFT) ? NEW_LOW_ENCODER_COUNTS : NEW_HIGH_ENCODER_COUNTS;
+  }
 
   public void setDriveToTarget(AutoTarget dt) {
     driveToTarget = dt;

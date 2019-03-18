@@ -34,8 +34,7 @@ public class PneumaticsCommand extends Command {
 
     long currentTime = System.currentTimeMillis();
     double[] encoder = Robot.sensors.getDriveEncoders();
-    double encoderCountsPerInch = Robot.pneumatics.getState(Pneumatics.SHIFT) ? 
-      Robot.sensors.ENCODER_COUNTS_PER_INCH_HIGH_GEAR : Robot.sensors.ENCODER_COUNTS_PER_INCH_LOW_GEAR;
+    double encoderCountsPerInch = Robot.sensors.getEncoderCountsPerInch();
       
     /*  
     if (lastTime != 0) {
@@ -45,12 +44,12 @@ public class PneumaticsCommand extends Command {
     	double distance = (changeLeftEncoder + changeRightEncoder)/2.0/encoderCountsPerInch;
       double velocity = distance / elapsedTime * 1000;
       SmartDashboard.putNumber("velocity", velocity);
-      //TODO: Change shift velocities
-      if(!Robot.pneumatics.getState(Pneumatics.SHIFT) && (Math.abs(velocity) > 120)){
+      
+      if(!Robot.pneumatics.getState(Pneumatics.SHIFT) && (Math.abs(velocity) > 55)){
         count += 1;
         if (count > 5) Robot.pneumatics.setState(Pneumatics.SHIFT, true);
       } else count = 0;
-      if((Robot.pneumatics.getState(Pneumatics.SHIFT)) && (Math.abs(velocity) < 80)){
+      if((Robot.pneumatics.getState(Pneumatics.SHIFT)) && (Math.abs(velocity) < 40)){
         Robot.pneumatics.setState(Pneumatics.SHIFT, false);
       }
     }*/
