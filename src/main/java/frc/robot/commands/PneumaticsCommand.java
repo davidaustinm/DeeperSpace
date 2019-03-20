@@ -37,7 +37,7 @@ public class PneumaticsCommand extends Command {
     double encoderCountsPerInch = Robot.sensors.getEncoderCountsPerInch();
       
     /*  
-    if (lastTime != 0) {
+    if (lastTime != 0 && Robot.gameState.isTeleop()) {
     	long elapsedTime = currentTime - lastTime;
     	double changeLeftEncoder = encoder[0] - lastLeftEncoder;
     	double changeRightEncoder = encoder[1] - lastRightEncoder;

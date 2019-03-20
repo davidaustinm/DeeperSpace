@@ -58,12 +58,11 @@ public class DriveToTarget extends Command implements AutoTarget{
   double clipAnglePct = 0.2;
   double distanceCutOut = 40;
   int countNotSeen = 0;
+  double timeOut = 2.0;
   @Override
   protected void execute() {
     double distance = Robot.targetInfo.getDistance();
     if(distance < distanceCutOut) {
-      timer = new Timer();
-      timer.start();
       dontReadDistance = true;
     }
     double[] driveEncoders = Robot.sensors.getDriveEncoders();
@@ -92,7 +91,13 @@ public class DriveToTarget extends Command implements AutoTarget{
     correction = Utilities.clip(correction, -clipAnglePct * currentSpeed, clipAnglePct * currentSpeed);
     double ramp = 1;
     double remaining = (encoderTarget - position)/Robot.sensors.ENCODER_COUNTS_PER_INCH_LOW_GEAR;
-    if (remaining < rampDown) ramp = remaining/rampDown;
+    if (remaining < rampDown) {
+      if (timer == null) {
+        timer = new Timer();
+        timer.start();
+      }
+      ramp = remaining/rampDown;
+    }
     double leftPower = currentSpeed * ramp - correction;
     double rightPower = currentSpeed * ramp + correction;
     Robot.driveTrain.setPower(leftPower, rightPower);
@@ -106,7 +111,7 @@ public class DriveToTarget extends Command implements AutoTarget{
     double[] driveEncoders = Robot.sensors.getDriveEncoders();
     double position = (driveEncoders[0] + driveEncoders[1])/2.0;
     //return position + 16 >= encoderTarget;
-    if (timer != null && timer.get() > 2.0) return true;
+    if (timer != null && timer.get() > timeOut) return true;
     return (position > encoderTarget - 24 && Robot.accelerometer.getJolt());
   }
 

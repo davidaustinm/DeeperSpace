@@ -14,6 +14,7 @@ import frc.robot.commands.DriveForwardForTime;
 import frc.robot.commands.DriveToTarget;
 import frc.robot.commands.DriveToTarget2;
 import frc.robot.commands.ExecuteDriveProfile;
+import frc.robot.commands.ExtendAndPush;
 import frc.robot.commands.ReadyIntake;
 import frc.robot.commands.RotateToHeading;
 import frc.robot.commands.SwitchDirection;
@@ -26,7 +27,7 @@ public class RightRocketFront extends CommandGroup {
   public RightRocketFront() {
     addParallel(new ReadyIntake());
     addSequential(new DriveToTarget());
-    addSequential(new AutoActivatePusher(true));
+    addSequential(new ExtendAndPush());
     addSequential(new DriveForwardForTime(350, -0.5));
     addSequential(new RotateToHeading(-135, 0.5, 0.5));
     addSequential(new DriveForwardForDistance(60, 0.4, -135, true));
@@ -43,7 +44,7 @@ public class RightRocketFront extends CommandGroup {
     addSequential(new Wait(50));
     //addSequential(new ExecuteDriveProfile("/home/lvuser/profiles/return-to-rocket.profile.csv"));
     addSequential(new DriveToTarget());
-    addSequential(new AutoActivatePusher(true));
+    addSequential(new ExtendAndPush());
     // Add Commands here:
     // e.g. addSequential(new Command1());
     // addSequential(new Command2());

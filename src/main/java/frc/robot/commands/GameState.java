@@ -16,17 +16,23 @@ import frc.robot.subsystems.Pneumatics;
 public class GameState {
     public static int ENDGAME = 0;
     public static int TELEOP = 1;
+    public static int AUTON = 2;
     int state = TELEOP;
     public void setState(int state) {
         this.state = state;
         
+        /* RESTORE
         if (state == ENDGAME) {
             Robot.pneumatics.setState(Pneumatics.FRONT_LIFT_SHIFT, true);
             Robot.pneumatics.setState(Pneumatics.RF_LATCH, true);
             Robot.intakeRotate.setState(IntakeRotateCommand.END);
         }
         else Robot.pneumatics.setState(Pneumatics.FRONT_LIFT_SHIFT, false);
-        
+        */
+    }
+
+    public boolean isTeleop() {
+        return state == TELEOP;
     }
     public boolean isEndGame() {
         return state == ENDGAME;

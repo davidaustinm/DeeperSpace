@@ -13,6 +13,7 @@ import frc.robot.commands.DriveForwardForDistance;
 import frc.robot.commands.DriveForwardForTime;
 import frc.robot.commands.DriveToTarget;
 import frc.robot.commands.DriveToTarget2;
+import frc.robot.commands.ExtendAndPush;
 import frc.robot.commands.ReadyIntake;
 import frc.robot.commands.RotateToHeading;
 import frc.robot.commands.SwitchDirection;
@@ -24,7 +25,7 @@ public class RightRocketFrontBack extends CommandGroup {
   public RightRocketFrontBack() {
     addParallel(new ReadyIntake());
     addSequential(new DriveToTarget());
-    addSequential(new AutoActivatePusher(true));
+    addSequential(new ExtendAndPush());
     addSequential(new DriveForwardForTime(350, -0.5));
     addSequential(new RotateToHeading(-135, 0.5, 0.5));
     addSequential(new DriveForwardForDistance(60, 0.4, -135, true));
@@ -40,7 +41,7 @@ public class RightRocketFrontBack extends CommandGroup {
     addSequential(new SwitchDirection());
     addSequential(new RotateToHeading(-90, 0.5, 0.5));
     addSequential(new DriveToTarget());
-    addSequential(new AutoActivatePusher(true));
+    addSequential(new ExtendAndPush());
     // Add Commands here:
     // e.g. addSequential(new Command1());
     // addSequential(new Command2());

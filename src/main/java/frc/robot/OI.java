@@ -36,11 +36,12 @@ public class OI {
   XboxTrigger level1 = new XboxTrigger(operator, XboxTrigger.A);
   XboxTrigger level2 = new XboxTrigger(operator, XboxTrigger.X);
   XboxTrigger level3 = new XboxTrigger(operator, XboxTrigger.Y);
+  XboxTrigger extendAndPush = new XboxTrigger(operator, XboxTrigger.B);
  
    public OI() {
     
-    // lowGear.whenActive(new Shift(true));
-    // highGear.whenActive(new Shift(false));
+    lowGear.whenActive(new Shift(true));
+    highGear.whenActive(new Shift(false));
     
     
     driveToTarget.whenActive(new NewDriveToTarget());
@@ -51,17 +52,21 @@ public class OI {
     raiseLift.toggleWhenActive(new RaiseRearLift());
     */
 
-    /*
-    panelCollect.whenActive(new ExtendPusher(false));
-    panelPlace.whenActive(new ExtendPusher(true));
+    
+    panelCollect.whenActive(new ExtendPusher(true));
+    panelPlace.whenActive(new ExtendPusher(false));
+    
     rotateOut.whenActive(new ChangeIntakeRotateState(IntakeRotateCommand.OUT));
     rotateIn.whenActive(new ChangeIntakeRotateState(IntakeRotateCommand.IN));
+    
     modeCargo.whenActive(new SetFrontLiftMode(FrontLiftMotors.CARGO_MODE));
     modePanel.whenActive(new SetFrontLiftMode(FrontLiftMotors.PANEL_MODE));
     level1.whenActive(new SetFrontLiftLevel(RobotMap.mode, FrontLiftMotors.LEVEL_1));
     level2.whenActive(new SetFrontLiftLevel(RobotMap.mode, FrontLiftMotors.LEVEL_2));
     level3.whenActive(new SetFrontLiftLevel(RobotMap.mode, FrontLiftMotors.LEVEL_3));
-    */
+    
+    extendAndPush.whenActive(new ExtendAndPush());
+    
   }
 
 }

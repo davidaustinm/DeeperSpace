@@ -83,6 +83,10 @@ public class Sensors extends Subsystem {
     gyroOffset = readGyro();
   }
 
+  public void setGyro(double degrees) {
+    gyroOffset = readGyro() - degrees;
+  }
+
   public double getHeading() {
     double heading = readGyro() - gyroOffset;
     if (Robot.driveTrain.isSwitched()) heading += 180;

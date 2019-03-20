@@ -49,19 +49,19 @@ import frc.robot.utilities.UDPServer;
 public class Robot extends TimedRobot {
   public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
   public static OI oi;
-  public static DeepSpaceDriveTrain driveTrain; // = new DeepSpaceDriveTrain();
+  public static DeepSpaceDriveTrain driveTrain = new DeepSpaceDriveTrain();
   public static Accelerometer accelerometer = new Accelerometer();
-  public static TwoSparkDrivetrain twoSparkDrivetrain = new TwoSparkDrivetrain();
-  public static IntakeRollerMotors intakeRoller; // = new IntakeRollerMotors();
-  public static IntakeRotateMotors intakeRotate; // = new IntakeRotateMotors();
-  public static FrontLiftMotors frontLift; // = new FrontLiftMotors();
+  public static TwoSparkDrivetrain twoSparkDrivetrain; // = new TwoSparkDrivetrain();
+  public static IntakeRollerMotors intakeRoller = new IntakeRollerMotors();
+  public static IntakeRotateMotors intakeRotate = new IntakeRotateMotors();
+  public static FrontLiftMotors frontLift = new FrontLiftMotors();
   public static RearLiftMotors rearLift; // = new RearLiftMotors();
   public static RearLiftDriveMotors rearLiftDrive; // = new RearLiftDriveMotors();
-  public static Sensors sensors; // = new Sensors();
+  public static Sensors sensors = new Sensors();
   public static TargetCamera camera;
   // public static TCPClient client = null;
   public static UDPServer client = null;
-  public static Pneumatics pneumatics;// = new Pneumatics();
+  public static Pneumatics pneumatics = new Pneumatics();
   public static GameState gameState = new GameState();
   public static TargetInfo targetInfo;
   //public static VelocityRecord velocityRecord = new VelocityRecord();
@@ -79,7 +79,9 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-    //Compressor compressor = new Compressor(0);
+    
+    Compressor compressor = new Compressor(0);
+    // RESTORE
     //compressor.setClosedLoopControl(true);
     //CameraServer.getInstance().startAutomaticCapture();
     
@@ -147,6 +149,7 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     m_autonomousCommand = m_chooser.getSelected();
+    // RESTORE
     //m_autonomousCommand = autoSwitches.getAutonCommand();
     //manualStart = autoSwitches.getManualMode();
 
@@ -163,6 +166,7 @@ public class Robot extends TimedRobot {
     rearLift.resetEncoder();
     */
     if (m_autonomousCommand != null && !manualStart) {
+      gameState.setState(GameState.AUTON);
       m_autonomousCommand.start();
     }
   }
@@ -203,7 +207,7 @@ public class Robot extends TimedRobot {
     
     if(Robot.driveTrain.isSwitched()) Robot.driveTrain.switchDirection();
     */
-
+    gameState.setState(GameState.TELEOP);
     if(m_autonomousCommand != null) m_autonomousCommand.cancel();
     
   }
@@ -246,10 +250,6 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("Front Lift State", RobotMap.mode);
     SmartDashboard.putNumber("Left drive", driveEncoders[0]);
     SmartDashboard.putNumber("Right drive", driveEncoders[1]);
-    
-    SmartDashboard.putBoolean("DIO Vac Sense", vacSys.getVacSense());
-    SmartDashboard.putBoolean("DIO Vac on", vacSys.getVacOn());
-    SmartDashboard.putBoolean("DIO Vac release", vacSys.getVacRelease());
 
     SmartDashboard.putNumber("Pitch", sensors.getPitch());
     SmartDashboard.putNumber("Front Lift Encoder", frontLift.getPosition());
