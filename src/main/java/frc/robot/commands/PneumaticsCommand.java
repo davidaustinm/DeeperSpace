@@ -7,6 +7,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
@@ -30,14 +31,12 @@ public class PneumaticsCommand extends Command {
   double lastLeftEncoder, lastRightEncoder;
   @Override
   protected void execute() {
-    Robot.pneumatics.update();
-
+    
     long currentTime = System.currentTimeMillis();
     double[] encoder = Robot.sensors.getDriveEncoders();
     double encoderCountsPerInch = Robot.sensors.getEncoderCountsPerInch();
-      
-    /*  
-    if (lastTime != 0 && Robot.gameState.isTeleop()) {
+    /*
+    if (lastTime != 0 && Robot.gameState.isTeleop() && !Robot.sensors.isDrivingToTarget()) {
     	long elapsedTime = currentTime - lastTime;
     	double changeLeftEncoder = encoder[0] - lastLeftEncoder;
     	double changeRightEncoder = encoder[1] - lastRightEncoder;
@@ -45,18 +44,25 @@ public class PneumaticsCommand extends Command {
       double velocity = distance / elapsedTime * 1000;
       SmartDashboard.putNumber("velocity", velocity);
       
-      if(!Robot.pneumatics.getState(Pneumatics.SHIFT) && (Math.abs(velocity) > 55)){
+      if(Robot.pneumatics.getState(Pneumatics.SHIFT) && (Math.abs(velocity) > 80)){
         count += 1;
-        if (count > 5) Robot.pneumatics.setState(Pneumatics.SHIFT, true);
+        if (count > 3) Robot.pneumatics.setState(Pneumatics.SHIFT, false);
       } else count = 0;
-      if((Robot.pneumatics.getState(Pneumatics.SHIFT)) && (Math.abs(velocity) < 40)){
+      if((!Robot.pneumatics.getState(Pneumatics.SHIFT)) && (Math.abs(velocity) < 30)){
+        Robot.pneumatics.setState(Pneumatics.SHIFT, true);
+      }
+
+      if (Math.abs(Robot.oi.driver.getY(Hand.kLeft)) > 0.85) {
         Robot.pneumatics.setState(Pneumatics.SHIFT, false);
       }
-    }*/
+    }
+    */
 
     lastTime = currentTime;
     lastLeftEncoder = encoder[0];
     lastRightEncoder = encoder[1];
+    Robot.pneumatics.update();
+
   }
 
   // Make this return true when this Command no longer needs to run execute()

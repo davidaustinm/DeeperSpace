@@ -17,7 +17,7 @@ public class LeftLeftCargo1 extends CommandGroup {
   public LeftLeftCargo1() {
     addParallel(new ReadyIntake());
     addSequential(new ExecuteDriveProfile("/home/lvuser/profiles/left-left-cargo-1.profile.csv"));
-    addSequential(new DriveToTarget());
+    addSequential(new DriveToTarget3());
     addSequential(new ExtendAndPush());
     
     // Add Commands here:

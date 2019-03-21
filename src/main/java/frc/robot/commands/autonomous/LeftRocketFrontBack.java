@@ -16,24 +16,28 @@ public class LeftRocketFrontBack extends CommandGroup {
    */
   public LeftRocketFrontBack() {
     addParallel(new ReadyIntake());
-    addSequential(new DriveToTarget());
-    addSequential(new ExtendAndPush());
+    addSequential(new Wait(250));
+    addSequential(new DriveForwardForDistance(50, 0.4, 0));
+    addSequential(new DriveToTarget3());
+    addParallel(new ExtendAndPush());
+    addSequential(new Wait(250));
     addSequential(new DriveForwardForTime(350, -0.5));
-    addSequential(new RotateToHeading(135, 0.5, 0.5));
-    addSequential(new DriveForwardForDistance(60, 0.4, 135, true));
+    double rotateAngle = 140;
+    addSequential(new RotateToHeading(rotateAngle, 0.5, 0.5));
+    addSequential(new DriveForwardForDistance(50, 0.4, rotateAngle, true));
     // addSequential(new SwitchDirection());
     // addSequential(new ExecuteDriveProfile("/home/lvuser/profiles/turn-left-rocket-front.profile.csv"));
     // addSequential(new SwitchDirection());
     // addSequential(new ExecuteDriveProfile("/home/lvuser/profiles/drive-to-portal.profile.csv"));
-    addSequential(new DriveToTarget());
+    addSequential(new DriveToTarget3());
     addSequential(new AutoActivatePusher(false));
-    addSequential(new SetGyro(-45));
+    //addSequential(new SetGyro(-45));
     addSequential(new SwitchDirection());
-    addSequential(new DriveForwardForDistance(12*12, 0.6, -55, true));
-    addSequential(new DriveForwardForDistance(130, 0.6, -51));
+    addSequential(new DriveForwardForDistance(12*12, 0.6, -45, true));
+    addSequential(new DriveForwardForDistance(130, 0.6, -40));
     addSequential(new SwitchDirection());
-    addSequential(new RotateToHeading(90, 0.57, 0.57));
-    addSequential(new DriveToTarget());
+    addSequential(new RotateToHeading(92, 0.57, 0.57));
+    addSequential(new DriveToTarget3());
     addSequential(new ExtendAndPush());
     // Add Commands here:
     // e.g. addSequential(new Command1());

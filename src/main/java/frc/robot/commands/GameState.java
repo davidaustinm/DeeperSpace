@@ -21,14 +21,13 @@ public class GameState {
     public void setState(int state) {
         this.state = state;
         
-        /* RESTORE
         if (state == ENDGAME) {
             Robot.pneumatics.setState(Pneumatics.FRONT_LIFT_SHIFT, true);
             Robot.pneumatics.setState(Pneumatics.RF_LATCH, true);
             Robot.intakeRotate.setState(IntakeRotateCommand.END);
         }
         else Robot.pneumatics.setState(Pneumatics.FRONT_LIFT_SHIFT, false);
-        */
+
     }
 
     public boolean isTeleop() {

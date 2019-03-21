@@ -19,7 +19,7 @@ public class IntakeRotateCommand extends Command {
   public static int MANUAL = 3;
   int state = IN;
   double encoderIn = 0;
-  double encoderOut = 2250;
+  double encoderOut = 2200; // 2250;
   double encoderEnd = 2700;
   double[] encoderStops = new double[] {encoderOut, encoderIn, encoderEnd, 0};
   public IntakeRotateCommand() {

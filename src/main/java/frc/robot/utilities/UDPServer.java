@@ -65,6 +65,11 @@ public class UDPServer implements Runnable, TargetInfo {
 
 	protected void setTargetInfo(double x, double y, double averArea) {
 		//System.out.println(x + " " + y + " " + averArea);
+		if (Double.isNaN(x)) {
+			distance = Double.NaN;
+			angle = Double.NaN;
+			return;
+		}
 		this.currX = x;
 		this.currY = y;
 		this.currArea = averArea;
@@ -127,7 +132,7 @@ public class UDPServer implements Runnable, TargetInfo {
 		}
 
 		while(!Thread.interrupted()) {
-			//ystem.out.println("UDP listening");
+			//System.out.println("UDP listening");
 			try {
 				// Reset the receive buffer else we'll get some weird results.
 				//System.out.println("inside try");

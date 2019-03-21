@@ -38,20 +38,19 @@ public class OI {
   XboxTrigger level3 = new XboxTrigger(operator, XboxTrigger.Y);
   XboxTrigger extendAndPush = new XboxTrigger(operator, XboxTrigger.B);
  
-   public OI() {
+  public OI() {
     
     lowGear.whenActive(new Shift(true));
     highGear.whenActive(new Shift(false));
+
+    DriveToTarget3 dt = new DriveToTarget3();
     
+    driveToTarget.whenActive(dt);
+    driveToTargetOff.cancelWhenActive(dt);
     
-    driveToTarget.whenActive(new NewDriveToTarget());
-    driveToTargetOff.whenActive(new DriveToTargetOff());;
-    /*
     endgame.whenActive(new ChangeGameState(GameState.ENDGAME));
     teleop.whenActive(new ChangeGameState(GameState.TELEOP));
-    raiseLift.toggleWhenActive(new RaiseRearLift());
-    */
-
+    //raiseLift.toggleWhenActive(new RaiseRearLift());
     
     panelCollect.whenActive(new ExtendPusher(true));
     panelPlace.whenActive(new ExtendPusher(false));

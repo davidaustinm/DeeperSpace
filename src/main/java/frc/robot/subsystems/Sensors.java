@@ -36,9 +36,18 @@ public class Sensors extends Subsystem {
   double[] lastDriveEncoder = new double[] {0,0};
   //DriveToTarget driveToTarget = null;
   AutoTarget driveToTarget = null;
+  boolean drivingToTarget = false;
 
   public Sensors() {
     navx = new AHRS(I2C.Port.kMXP);
+  }
+
+  public void setDrivingToTarget(boolean b) {
+    drivingToTarget = b;
+  }
+
+  public boolean isDrivingToTarget() {
+    return drivingToTarget;
   }
 
   /*
@@ -112,6 +121,11 @@ public class Sensors extends Subsystem {
     double[] encoderReadings = readDriveEncoders();
     return new double[] {encoderReadings[0] - driveEncoderOffsets[0],
                       encoderReadings[1]-driveEncoderOffsets[1]};
+  }
+
+  public double getAverageDriveEncoder() {
+    double[] encoders = getDriveEncoders();
+    return (encoders[0] + encoders[1]) / 2.0;
   }
 
   public double getLeftDriveEncoder() {

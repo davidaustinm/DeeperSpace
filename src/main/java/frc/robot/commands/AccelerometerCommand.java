@@ -54,8 +54,8 @@ public class AccelerometerCommand extends Command {
   }
 
   public boolean jolt() {
-    if (Math.abs(averages[0]) > 0.5) return true;
-    if (Math.abs(averages[1]) > 0.5) return true;
+    if (Math.abs(averages[0]) > 0.25) return true;
+    if (Math.abs(averages[1]) > 0.25) return true;
     return false;
   }
 

@@ -55,8 +55,8 @@ public class Robot extends TimedRobot {
   public static IntakeRollerMotors intakeRoller = new IntakeRollerMotors();
   public static IntakeRotateMotors intakeRotate = new IntakeRotateMotors();
   public static FrontLiftMotors frontLift = new FrontLiftMotors();
-  public static RearLiftMotors rearLift; // = new RearLiftMotors();
-  public static RearLiftDriveMotors rearLiftDrive; // = new RearLiftDriveMotors();
+  public static RearLiftMotors rearLift = new RearLiftMotors();
+  public static RearLiftDriveMotors rearLiftDrive = new RearLiftDriveMotors();
   public static Sensors sensors = new Sensors();
   public static TargetCamera camera;
   // public static TCPClient client = null;
@@ -81,8 +81,8 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     
     Compressor compressor = new Compressor(0);
-    // RESTORE
-    //compressor.setClosedLoopControl(true);
+    
+    compressor.setClosedLoopControl(true);
     //CameraServer.getInstance().startAutomaticCapture();
     
     oi = new OI();
@@ -150,12 +150,12 @@ public class Robot extends TimedRobot {
   public void autonomousInit() {
     m_autonomousCommand = m_chooser.getSelected();
     // RESTORE
-    //m_autonomousCommand = autoSwitches.getAutonCommand();
-    //manualStart = autoSwitches.getManualMode();
+    m_autonomousCommand = autoSwitches.getAutonCommand();
+    manualStart = autoSwitches.getManualMode();
+    System.out.println(manualStart + " " + m_autonomousCommand);
 
-    m_autonomousCommand = new DriveToJolt();
+    //m_autonomousCommand = new DriveToJolt();
 
-    /* RESTORE 
     sensors.resetGyro();
     sensors.resetDriveEncoders();
     sensors.resetPosition();
@@ -164,7 +164,7 @@ public class Robot extends TimedRobot {
     intakeRotate.resetOffset();
     frontLift.resetEncoder();
     rearLift.resetEncoder();
-    */
+
     if (m_autonomousCommand != null && !manualStart) {
       gameState.setState(GameState.AUTON);
       m_autonomousCommand.start();
@@ -176,7 +176,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousPeriodic() {
-    // RESTORE sensors.updatePosition();
+    sensors.updatePosition();
     if (m_autonomousCommand != null && Robot.oi.driver.getBButton()) {
       if (manualStart && !m_autonomousCommand.isRunning()) {
         m_autonomousCommand.start();
@@ -204,9 +204,8 @@ public class Robot extends TimedRobot {
     sensors.resetDriveEncoders();
     sensors.resetGyro();
     sensors.resetPitch();
-    
-    if(Robot.driveTrain.isSwitched()) Robot.driveTrain.switchDirection();
     */
+    if(Robot.driveTrain.isSwitched()) Robot.driveTrain.switchDirection();
     gameState.setState(GameState.TELEOP);
     if(m_autonomousCommand != null) m_autonomousCommand.cancel();
     

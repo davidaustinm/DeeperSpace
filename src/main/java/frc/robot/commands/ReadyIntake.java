@@ -16,7 +16,7 @@ public class ReadyIntake extends CommandGroup {
    * Add your docs here.
    */
   public ReadyIntake() {
-    addSequential(new Wait(250));
+    //addSequential(new Wait(250));
     addSequential(new SetFrontLiftMode(FrontLiftMotors.PANEL_MODE));
     addSequential(new SetFrontLiftLevel(RobotMap.mode, FrontLiftMotors.LEVEL_1));
     addSequential(new ChangeIntakeRotateState(IntakeRotateCommand.OUT));
