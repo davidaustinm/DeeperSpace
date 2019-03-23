@@ -49,12 +49,12 @@ public class FrontLiftMotors extends Subsystem {
     levels[CARGO_MODE][LEVEL_1] = 9400;
     levels[CARGO_MODE][LEVEL_2] = 20700;
     levels[CARGO_MODE][LEVEL_3] = 30000;
-    levels[CARGO_MODE][CARGOINTAKE] = 17264;
+    levels[CARGO_MODE][CARGOINTAKE] = 16564;
     levels[PANEL_MODE][LEVEL_GROUND] = 0;
     levels[PANEL_MODE][LEVEL_1] = 2400;
     levels[PANEL_MODE][LEVEL_2] = 13900;
     levels[PANEL_MODE][LEVEL_3] = 25500;
-    levels[PANEL_MODE][CARGOINTAKE] = 17264; // 18264
+    levels[PANEL_MODE][CARGOINTAKE] = 16564; // 18264
   }
 
   public void setManual(boolean b) {
