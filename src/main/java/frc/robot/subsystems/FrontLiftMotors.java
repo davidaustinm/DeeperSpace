@@ -20,12 +20,13 @@ public class FrontLiftMotors extends Subsystem {
   public static final int LEVEL_1 = 1;
   public static final int LEVEL_2 = 2;
   public static final int LEVEL_3 = 3;
+  public static final int CARGOINTAKE = 4;
   
 
   public static final int CARGO_MODE = 0;
   public static final int PANEL_MODE = 1;
 
-  int[][] levels = new int[2][4];
+  int[][] levels = new int[2][5];
 
 
   boolean manual = false;
@@ -48,10 +49,12 @@ public class FrontLiftMotors extends Subsystem {
     levels[CARGO_MODE][LEVEL_1] = 9400;
     levels[CARGO_MODE][LEVEL_2] = 20700;
     levels[CARGO_MODE][LEVEL_3] = 30000;
+    levels[CARGO_MODE][CARGOINTAKE] = 17264;
     levels[PANEL_MODE][LEVEL_GROUND] = 0;
     levels[PANEL_MODE][LEVEL_1] = 2400;
     levels[PANEL_MODE][LEVEL_2] = 13900;
     levels[PANEL_MODE][LEVEL_3] = 25500;
+    levels[PANEL_MODE][CARGOINTAKE] = 17264; // 18264
   }
 
   public void setManual(boolean b) {

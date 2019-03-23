@@ -83,7 +83,7 @@ public class Robot extends TimedRobot {
     Compressor compressor = new Compressor(0);
     
     compressor.setClosedLoopControl(true);
-    //CameraServer.getInstance().startAutomaticCapture();
+    CameraServer.getInstance().startAutomaticCapture(); 
     
     oi = new OI();
 
@@ -114,6 +114,7 @@ public class Robot extends TimedRobot {
     //System.out.println(autoSwitches.getAutonCommand().getName());
     //velocityRecord.updateVelocity();
     //SmartDashboard.putNumber("lidar", lidar.getDistance());
+    // SmartDashboard.putNumber("gyro", sensors.getHeading());
   }
 
   /**
@@ -217,6 +218,8 @@ public class Robot extends TimedRobot {
   double lastAverage = 0;
   @Override
   public void teleopPeriodic() {
+    // SmartDashboard.putNumber("Rear Lift Encoder", rearLift.getPosition());
+    SmartDashboard.putNumber("Front Lift Encoder", frontLift.getPosition());
     /*
     double[] driveEncoders = sensors.getDriveEncoders();
   
@@ -243,9 +246,8 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("Left drive", driveEncoders[0]);
     SmartDashboard.putNumber("Right drive", driveEncoders[1]);
     SmartDashboard.putNumber("gyro", sensors.getHeading());
-    SmartDashboard.putNumber("Front Lift Encoder", frontLift.getPosition());
     
-    SmartDashboard.putNumber("Rear Lift Encoder", rearLift.getPosition());
+   
     SmartDashboard.putNumber("Front Lift State", RobotMap.mode);
     SmartDashboard.putNumber("Left drive", driveEncoders[0]);
     SmartDashboard.putNumber("Right drive", driveEncoders[1]);

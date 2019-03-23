@@ -26,7 +26,7 @@ public class DriveToTarget3 extends Command {
   double kAngle = 0.005;
   double clipAnglePct = 0.2;
   double speed = 0.3;
-  double stopWithJolt = 30;
+  double stopWithJolt = 25;
   
   public DriveToTarget3() {
     // Use requires() here to declare subsystem dependencies
@@ -98,7 +98,7 @@ public class DriveToTarget3 extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    System.out.println(remainingDistance);
+    //System.out.println(remainingDistance);
     if (remainingDistance < 20) {
       System.out.println("remaining time");
       return true;
@@ -112,7 +112,7 @@ public class DriveToTarget3 extends Command {
       return true;
     }
     if (remainingDistance < stopWithJolt && Robot.accelerometer.getJolt()) {
-      System.out.println("jolt");
+      System.out.println("jolt " + remainingDistance);
       return true;
     }
     return false;

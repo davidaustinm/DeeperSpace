@@ -22,6 +22,10 @@ import frc.robot.commands.RearLiftCommand;
 public class RearLiftMotors extends Subsystem {
   TalonSRX lift1 = new TalonSRX(RobotMap.REAR_LIFT1);
   TalonSRX lift2 = new TalonSRX(RobotMap.REAR_LIFT2);
+  boolean level3 = true;
+  static double LEVEL3LIMIT = -17800;
+  static double LEVEL2LIMIT = -7800; 
+  double lowerLimit = LEVEL3LIMIT;
 
   int encoderOffset = 0;
 
@@ -36,9 +40,19 @@ public class RearLiftMotors extends Subsystem {
     //System.out.println(power);
     if (Math.abs(power) < 0.1) power = 0;
     if (power > 0 && getPosition() > 0) power = 0;
-    if (power < 0 && getPosition() < -17800) power = 0;
+    if (power < 0 && getPosition() < lowerLimit) power = 0;
     lift2.set(ControlMode.PercentOutput, power);
     
+  }
+
+  public void setLevel3(boolean b) {
+    level3 = b;
+    if (level3) lowerLimit = LEVEL3LIMIT;
+    else lowerLimit = LEVEL2LIMIT;
+  }
+
+  public boolean getLevel3() {
+    return level3;
   }
 
   public void resetEncoder() {

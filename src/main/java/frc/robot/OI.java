@@ -26,6 +26,8 @@ public class OI {
   XboxTrigger teleop = new XboxTrigger(driver, XboxTrigger.TELEOP);
   XboxTrigger raiseLift = new XboxTrigger(driver, XboxTrigger.RT);
   XboxTrigger driveToTargetOff = new XboxTrigger(driver, XboxTrigger.LB);
+  XboxTrigger level3Climb = new XboxTrigger(driver, XboxTrigger.DPADUP);
+  XboxTrigger level2Climb = new XboxTrigger(driver, XboxTrigger.DPADDOWN);
     
   XboxTrigger panelCollect = new XboxTrigger(operator, XboxTrigger.DPADUP);
   XboxTrigger panelPlace = new XboxTrigger(operator, XboxTrigger.DPADDOWN);
@@ -33,9 +35,11 @@ public class OI {
   XboxTrigger rotateIn = new XboxTrigger(operator, XboxTrigger.RB);
   XboxTrigger modeCargo = new XboxTrigger(operator, XboxTrigger.DPADLEFT);
   XboxTrigger modePanel = new XboxTrigger(operator, XboxTrigger.DPADRIGHT);
+  XboxTrigger levelCargo = new XboxTrigger(operator, XboxTrigger.START);
   XboxTrigger level1 = new XboxTrigger(operator, XboxTrigger.A);
   XboxTrigger level2 = new XboxTrigger(operator, XboxTrigger.X);
   XboxTrigger level3 = new XboxTrigger(operator, XboxTrigger.Y);
+
   XboxTrigger extendAndPush = new XboxTrigger(operator, XboxTrigger.B);
  
   public OI() {
@@ -51,6 +55,8 @@ public class OI {
     endgame.whenActive(new ChangeGameState(GameState.ENDGAME));
     teleop.whenActive(new ChangeGameState(GameState.TELEOP));
     //raiseLift.toggleWhenActive(new RaiseRearLift());
+    level2Climb.whenActive(new SetLevel3(false));
+    level3Climb.whenActive(new SetLevel3(true));
     
     panelCollect.whenActive(new ExtendPusher(true));
     panelPlace.whenActive(new ExtendPusher(false));
@@ -63,6 +69,7 @@ public class OI {
     level1.whenActive(new SetFrontLiftLevel(RobotMap.mode, FrontLiftMotors.LEVEL_1));
     level2.whenActive(new SetFrontLiftLevel(RobotMap.mode, FrontLiftMotors.LEVEL_2));
     level3.whenActive(new SetFrontLiftLevel(RobotMap.mode, FrontLiftMotors.LEVEL_3));
+    levelCargo.whenActive(new SetFrontLiftLevel(RobotMap.mode, FrontLiftMotors.CARGOINTAKE));
     
     extendAndPush.whenActive(new ExtendAndPush());
     

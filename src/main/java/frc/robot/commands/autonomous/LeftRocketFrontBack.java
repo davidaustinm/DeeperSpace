@@ -34,9 +34,9 @@ public class LeftRocketFrontBack extends CommandGroup {
     //addSequential(new SetGyro(-45));
     addSequential(new SwitchDirection());
     addSequential(new DriveForwardForDistance(12*12, 0.6, -45, true));
-    addSequential(new DriveForwardForDistance(130, 0.6, -40));
+    addSequential(new DriveForwardForDistance(127, 0.6, -39)); // 130 -40
     addSequential(new SwitchDirection());
-    addSequential(new RotateToHeading(92, 0.57, 0.57));
+    addSequential(new RotateToHeading(104, 0.57, 0.57));
     addSequential(new DriveToTarget3());
     addSequential(new ExtendAndPush());
     // Add Commands here:
