@@ -30,6 +30,7 @@ public class DeepSpaceDriveTrain extends Subsystem {
   double maxSpeed = 1;
   boolean switched = false;
   ArcadeDriveCommand defaultCommand;
+  boolean decreaseTurnPower = false;
   public DeepSpaceDriveTrain() {
     rightMaster = new CANSparkMax(RobotMap.RIGHT_MASTER, MotorType.kBrushless);
     rightSlave1 = new CANSparkMax(RobotMap.RIGHT_SLAVE1, MotorType.kBrushless);
@@ -64,6 +65,14 @@ public class DeepSpaceDriveTrain extends Subsystem {
     rightSlave1.setPeriodicFramePeriod(PeriodicFrame.kStatus2,10);
     rightMaster.setPeriodicFramePeriod(PeriodicFrame.kStatus2,10);
     rightSlave2.setPeriodicFramePeriod(PeriodicFrame.kStatus2,10);
+  }
+
+  public void setDecreaseTurnPower(boolean b) {
+    decreaseTurnPower = b;
+  }
+
+  public boolean getDecreaseTurnPower() {
+    return decreaseTurnPower;
   }
 
   public void setMaxSpeed(double speed) {

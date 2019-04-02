@@ -24,7 +24,7 @@ public class OI {
   XboxTrigger driveToTarget = new XboxTrigger(driver, XboxTrigger.RB);
   XboxTrigger endgame = new XboxTrigger(driver, XboxTrigger.ENDGAME);
   XboxTrigger teleop = new XboxTrigger(driver, XboxTrigger.TELEOP);
-  XboxTrigger raiseLift = new XboxTrigger(driver, XboxTrigger.RT);
+  XboxTrigger driveToPlace = new XboxTrigger(driver, XboxTrigger.RT);
   XboxTrigger driveToTargetOff = new XboxTrigger(driver, XboxTrigger.LB);
   XboxTrigger level3Climb = new XboxTrigger(driver, XboxTrigger.DPADUP);
   XboxTrigger level2Climb = new XboxTrigger(driver, XboxTrigger.DPADDOWN);
@@ -55,6 +55,8 @@ public class OI {
     endgame.whenActive(new ChangeGameState(GameState.ENDGAME));
     teleop.whenActive(new ChangeGameState(GameState.TELEOP));
     //raiseLift.toggleWhenActive(new RaiseRearLift());
+    driveToPlace.whenActive(new DriveToPlace(true));
+    driveToPlace.whenInactive(new DriveToPlace(false));
     level2Climb.whenActive(new SetLevel3(false));
     level3Climb.whenActive(new SetLevel3(true));
     

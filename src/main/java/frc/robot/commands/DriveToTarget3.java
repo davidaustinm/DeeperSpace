@@ -99,7 +99,7 @@ public class DriveToTarget3 extends Command {
   @Override
   protected boolean isFinished() {
     //System.out.println(remainingDistance);
-    if (remainingDistance < 20) {
+    if (remainingDistance < 18) {
       System.out.println("remaining time");
       return true;
     }
