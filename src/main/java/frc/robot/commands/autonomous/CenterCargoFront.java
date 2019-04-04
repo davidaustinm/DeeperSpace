@@ -17,8 +17,9 @@ public class CenterCargoFront extends CommandGroup {
   public CenterCargoFront() {
     addParallel(new ReadyIntake());
     addSequential(new Wait(750));
+    addSequential(new DriveForwardForDistance(40, 0.4, 0));
     addSequential(new DriveToTarget3());
-    addSequential(new DriveForwardForDistance(2.5, 0.2, 0));
+    //addSequential(new DriveForwardForDistance(2.5, 0.2, 0));
     //addSequential(new ExtendAndPush());
   
   }
