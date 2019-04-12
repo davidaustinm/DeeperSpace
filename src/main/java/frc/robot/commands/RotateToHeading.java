@@ -26,7 +26,7 @@ public class RotateToHeading extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    timeout = System.currentTimeMillis() + 2000;
+    timeout = System.currentTimeMillis() + 1200;
   }
 
   // Called repeatedly when this Command is scheduled to run

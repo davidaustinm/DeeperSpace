@@ -42,7 +42,8 @@ public class ArcadeDriveCommand extends Command {
       return;
     }
     double maxTurn = Robot.driveTrain.getDecreaseTurnPower() ? 0.4 : 0.6;
-    double throttle = -Robot.oi.driver.getY(Hand.kLeft);
+    double maxThrottle = Robot.driveTrain.getDecreaseTurnPower() ? 0.6 : 1;
+    double throttle = -maxThrottle*Robot.oi.driver.getY(Hand.kLeft);
     double steering = -maxTurn*Robot.oi.driver.getX(Hand.kRight);
     double power = (alpha * throttle) + (alpham1 * lastThrottle);
     if (Math.abs(throttle) < Math.abs(lastThrottle)) power = throttle;

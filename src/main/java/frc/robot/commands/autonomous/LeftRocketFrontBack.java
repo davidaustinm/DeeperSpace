@@ -15,14 +15,15 @@ public class LeftRocketFrontBack extends CommandGroup {
    * Add your docs here.
    */
   public LeftRocketFrontBack() {
+    double angleAdjust = 4;
     addParallel(new ReadyIntake());
     addSequential(new Wait(250));
-    addSequential(new DriveForwardForDistance(50, 0.4, 0));
+    addSequential(new DriveForwardForDistance(40, 0.4, 0)); //50
     addSequential(new DriveToTarget3());
     addParallel(new ExtendAndPush());
     addSequential(new Wait(250));
     addSequential(new DriveForwardForTime(350, -0.5));
-    double rotateAngle = 140;
+    double rotateAngle = 140 + angleAdjust;
     addSequential(new RotateToHeading(rotateAngle, 0.5, 0.5));
     addSequential(new DriveForwardForDistance(50, 0.4, rotateAngle, true));
     // addSequential(new SwitchDirection());
@@ -33,12 +34,13 @@ public class LeftRocketFrontBack extends CommandGroup {
     addSequential(new AutoActivatePusher(false));
     //addSequential(new SetGyro(-45));
     addSequential(new SwitchDirection());
-    addSequential(new DriveForwardForDistanceWithKd(12*12, 0.6, -45, true));
-    addSequential(new DriveForwardForDistanceWithKd(130, 0.6, -37)); // 130 -40
+    addSequential(new DriveForwardForDistanceWithKd(12*12, 0.75, -45+angleAdjust, true));
+    addSequential(new DriveForwardForDistanceWithKd(130, 0.75, -35+angleAdjust)); // 130 -40
     addSequential(new SwitchDirection());
-    addSequential(new RotateToHeading(104, 0.57, 0.57));
+    addSequential(new RotateToHeading(109+angleAdjust, 0.62, 0.62));
     addSequential(new DriveToTarget3());
-    addSequential(new ExtendAndPush());
+    addSequential(new DriveForwardForTime(400, 0.3));
+    //addSequential(new ExtendAndPush());
     // Add Commands here:
     // e.g. addSequential(new Command1());
     // addSequential(new Command2());

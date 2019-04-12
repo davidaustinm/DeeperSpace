@@ -15,7 +15,7 @@ import frc.robot.subsystems.Pneumatics;
 public class AutoActivatePusher extends Command {
   boolean extend;
   Timer timer;
-  double timeout = 0.5;
+  double timeout = 0.1; //0.5;
   public AutoActivatePusher(boolean extend) {
     this.extend = extend;
     timer = new Timer();

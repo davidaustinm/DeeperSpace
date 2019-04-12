@@ -14,7 +14,7 @@ import frc.robot.subsystems.Pneumatics;
 import frc.robot.subsystems.Sensors;
 import frc.robot.utilities.Utilities;
 
-public class DriveToTarget3 extends Command {
+public class DriveToFirstTarget extends Command {
   Timer endTimer, neverSeenTimer;
   double encoderTarget;
   double remainingDistance=9999;
@@ -24,11 +24,11 @@ public class DriveToTarget3 extends Command {
   double targetOff = 45;
   double rampDown = 40;
   double kAngle = 0.005;
-  double clipAnglePct = 0.2;
+  double clipAnglePct = 0.4;
   double speed = 0.3;
   double stopWithJolt = 20;  //25
   
-  public DriveToTarget3() {
+  public DriveToFirstTarget() {
     // Use requires() here to declare subsystem dependencies
     requires(Robot.driveTrain);
   }
@@ -52,7 +52,9 @@ public class DriveToTarget3 extends Command {
       remainingDistance = distance;
     }
   }
-
+  double kp = 0.02;
+  double kd = 0.1;
+  double lastError = 0;
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
@@ -89,9 +91,12 @@ public class DriveToTarget3 extends Command {
     }
     remainingDistance = distance;
     encoderTarget = position + distance * Sensors.NEW_HIGH_ENCODER_COUNTS;
-    double correction = kAngle * Robot.targetInfo.getAngle();
+    double error = Robot.targetInfo.getAngle();
+    double changeInError = error - lastError;
+    double correction = kp * error + kd * changeInError;
     correction = Utilities.clip(correction, -clipAnglePct*speed, clipAnglePct*speed);
     Robot.driveTrain.setPower(speed - correction, speed + correction);
+    lastError = error;
 
   }
 

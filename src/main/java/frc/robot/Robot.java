@@ -241,8 +241,9 @@ public class Robot extends TimedRobot {
     //double[] driveEncoders = sensors.getDriveEncoders();
     //System.out.println(driveEncoders[0] + " " + driveEncoders[1]);
     //System.out.println("pitch = " + sensors.getHeading());
-    /*
+    
     SmartDashboard.putNumber("Intake Rotate Encoder", sensors.getIntakeRotatePosition());
+    /*
     SmartDashboard.putNumber("Left drive", driveEncoders[0]);
     SmartDashboard.putNumber("Right drive", driveEncoders[1]);
     SmartDashboard.putNumber("gyro", sensors.getHeading());
